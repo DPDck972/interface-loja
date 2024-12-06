@@ -1,0 +1,11 @@
+debug/loja-main.o
+debug/loja.o
+debug/incluircd.o
+debug/incluirdvd.o
+debug/incluirlivro.o
+debug/main.o
+debug/mainloja.o
+debug/moc_incluircd.o
+debug/moc_incluirdvd.o
+debug/moc_incluirlivro.o
+debug/moc_mainloja.o
