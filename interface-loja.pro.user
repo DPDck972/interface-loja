@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 15.0.0, 2024-12-06T11:48:45. -->
+<!-- Written by QtCreator 15.0.0, 2024-12-09T13:36:19. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -165,10 +165,11 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">C:/Users/Phantom Duck/Documents/UFRN/2024.2 - PROGRAMACAO AVANCADA - Turma 02/Avaliação 03/Loja/Interface/interface-loja/interface-loja.pro</value>
-    <value type="bool" key="ProjectExplorer.RunConfiguration.Customized">false</value>
+    <value type="bool" key="ProjectExplorer.RunConfiguration.Customized">true</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory">C:/Users/Phantom Duck/Documents/UFRN/2024.2 - PROGRAMACAO AVANCADA - Turma 02/Avaliação 03/Loja/Interface/interface-loja</value>
     <value type="QString" key="RunConfiguration.WorkingDirectory.default">C:/Users/Phantom Duck/Documents/UFRN/2024.2 - PROGRAMACAO AVANCADA - Turma 02/Avaliação 03/Loja/Interface/interface-loja/build/Desktop_Qt_6_8_1_MinGW_64_bit-Debug</value>
    </valuemap>
    <value type="qlonglong" key="ProjectExplorer.Target.RunConfigurationCount">1</value>

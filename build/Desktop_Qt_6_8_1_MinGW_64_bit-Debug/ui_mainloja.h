@@ -19,7 +19,6 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
-#include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTableWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -29,10 +28,14 @@ QT_BEGIN_NAMESPACE
 class Ui_MainLoja
 {
 public:
+    QAction *actionLer;
+    QAction *actionSalvar;
+    QAction *actionSair;
+    QAction *actionIncluir_livro;
+    QAction *actionIncluir_CD;
+    QAction *actionIncluir_DVD;
     QWidget *widget_central;
-    QLabel *Total_itens_label;
-    QLabel *Total_tens_value;
-    QWidget *widget;
+    QWidget *layoutWidget;
     QVBoxLayout *Layout_total;
     QHBoxLayout *LayoutLabel;
     QLabel *Label_Livros;
@@ -42,10 +45,13 @@ public:
     QTableWidget *tableWidget_Livros;
     QTableWidget *tableWidget_CD;
     QTableWidget *tableWidget_DVD;
+    QWidget *widget;
+    QHBoxLayout *horizontalLayout;
+    QLabel *Total_itens_label;
+    QLabel *Total_tens_value;
     QMenuBar *menubar;
     QMenu *menuArquivo;
     QMenu *menuItem;
-    QStatusBar *statusbar;
 
     void setupUi(QMainWindow *MainLoja)
     {
@@ -56,6 +62,18 @@ public:
         MainLoja->setWindowIcon(icon);
         MainLoja->setAutoFillBackground(false);
         MainLoja->setDocumentMode(false);
+        actionLer = new QAction(MainLoja);
+        actionLer->setObjectName("actionLer");
+        actionSalvar = new QAction(MainLoja);
+        actionSalvar->setObjectName("actionSalvar");
+        actionSair = new QAction(MainLoja);
+        actionSair->setObjectName("actionSair");
+        actionIncluir_livro = new QAction(MainLoja);
+        actionIncluir_livro->setObjectName("actionIncluir_livro");
+        actionIncluir_CD = new QAction(MainLoja);
+        actionIncluir_CD->setObjectName("actionIncluir_CD");
+        actionIncluir_DVD = new QAction(MainLoja);
+        actionIncluir_DVD->setObjectName("actionIncluir_DVD");
         widget_central = new QWidget(MainLoja);
         widget_central->setObjectName("widget_central");
         widget_central->setEnabled(true);
@@ -63,22 +81,15 @@ public:
         font.setFamilies({QString::fromUtf8("Segoe UI")});
         widget_central->setFont(font);
         widget_central->setAutoFillBackground(true);
-        Total_itens_label = new QLabel(widget_central);
-        Total_itens_label->setObjectName("Total_itens_label");
-        Total_itens_label->setGeometry(QRect(10, 540, 81, 20));
-        Total_itens_label->setAlignment(Qt::AlignmentFlag::AlignCenter);
-        Total_tens_value = new QLabel(widget_central);
-        Total_tens_value->setObjectName("Total_tens_value");
-        Total_tens_value->setGeometry(QRect(110, 540, 71, 16));
-        widget = new QWidget(widget_central);
-        widget->setObjectName("widget");
-        widget->setGeometry(QRect(9, 9, 971, 531));
-        Layout_total = new QVBoxLayout(widget);
+        layoutWidget = new QWidget(widget_central);
+        layoutWidget->setObjectName("layoutWidget");
+        layoutWidget->setGeometry(QRect(9, 9, 971, 531));
+        Layout_total = new QVBoxLayout(layoutWidget);
         Layout_total->setObjectName("Layout_total");
         Layout_total->setContentsMargins(0, 0, 0, 0);
         LayoutLabel = new QHBoxLayout();
         LayoutLabel->setObjectName("LayoutLabel");
-        Label_Livros = new QLabel(widget);
+        Label_Livros = new QLabel(layoutWidget);
         Label_Livros->setObjectName("Label_Livros");
         Label_Livros->setEnabled(true);
         Label_Livros->setAutoFillBackground(false);
@@ -90,7 +101,7 @@ public:
 
         LayoutLabel->addWidget(Label_Livros);
 
-        Label_CDs = new QLabel(widget);
+        Label_CDs = new QLabel(layoutWidget);
         Label_CDs->setObjectName("Label_CDs");
         Label_CDs->setAutoFillBackground(false);
         Label_CDs->setStyleSheet(QString::fromUtf8("color: rgb(0,0,0);\n"
@@ -101,7 +112,7 @@ public:
 
         LayoutLabel->addWidget(Label_CDs);
 
-        Label_DVD = new QLabel(widget);
+        Label_DVD = new QLabel(layoutWidget);
         Label_DVD->setObjectName("Label_DVD");
         Label_DVD->setAutoFillBackground(false);
         Label_DVD->setStyleSheet(QString::fromUtf8("color: rgb(0,0,0);\n"
@@ -117,7 +128,7 @@ public:
 
         Layout_tables = new QHBoxLayout();
         Layout_tables->setObjectName("Layout_tables");
-        tableWidget_Livros = new QTableWidget(widget);
+        tableWidget_Livros = new QTableWidget(layoutWidget);
         if (tableWidget_Livros->columnCount() < 3)
             tableWidget_Livros->setColumnCount(3);
         QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
@@ -149,6 +160,9 @@ public:
         tableWidget_Livros->setVerticalScrollBarPolicy(Qt::ScrollBarPolicy::ScrollBarAlwaysOn);
         tableWidget_Livros->setHorizontalScrollBarPolicy(Qt::ScrollBarPolicy::ScrollBarAlwaysOn);
         tableWidget_Livros->setEditTriggers(QAbstractItemView::EditTrigger::AnyKeyPressed|QAbstractItemView::EditTrigger::DoubleClicked|QAbstractItemView::EditTrigger::EditKeyPressed);
+        tableWidget_Livros->setTabKeyNavigation(false);
+        tableWidget_Livros->setSelectionMode(QAbstractItemView::SelectionMode::SingleSelection);
+        tableWidget_Livros->setSelectionBehavior(QAbstractItemView::SelectionBehavior::SelectRows);
         tableWidget_Livros->horizontalHeader()->setVisible(true);
         tableWidget_Livros->horizontalHeader()->setCascadingSectionResizes(false);
         tableWidget_Livros->horizontalHeader()->setDefaultSectionSize(100);
@@ -156,7 +170,7 @@ public:
 
         Layout_tables->addWidget(tableWidget_Livros);
 
-        tableWidget_CD = new QTableWidget(widget);
+        tableWidget_CD = new QTableWidget(layoutWidget);
         if (tableWidget_CD->columnCount() < 3)
             tableWidget_CD->setColumnCount(3);
         QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
@@ -176,11 +190,14 @@ public:
         tableWidget_CD->viewport()->setProperty("cursor", QVariant(QCursor(Qt::CursorShape::PointingHandCursor)));
         tableWidget_CD->setVerticalScrollBarPolicy(Qt::ScrollBarPolicy::ScrollBarAlwaysOn);
         tableWidget_CD->setHorizontalScrollBarPolicy(Qt::ScrollBarPolicy::ScrollBarAlwaysOn);
+        tableWidget_CD->setTabKeyNavigation(false);
+        tableWidget_CD->setSelectionMode(QAbstractItemView::SelectionMode::SingleSelection);
+        tableWidget_CD->setSelectionBehavior(QAbstractItemView::SelectionBehavior::SelectRows);
         tableWidget_CD->verticalHeader()->setVisible(false);
 
         Layout_tables->addWidget(tableWidget_CD);
 
-        tableWidget_DVD = new QTableWidget(widget);
+        tableWidget_DVD = new QTableWidget(layoutWidget);
         if (tableWidget_DVD->columnCount() < 3)
             tableWidget_DVD->setColumnCount(3);
         QTableWidgetItem *__qtablewidgetitem6 = new QTableWidgetItem();
@@ -210,6 +227,23 @@ public:
 
         Layout_total->addLayout(Layout_tables);
 
+        widget = new QWidget(widget_central);
+        widget->setObjectName("widget");
+        widget->setGeometry(QRect(10, 540, 167, 18));
+        horizontalLayout = new QHBoxLayout(widget);
+        horizontalLayout->setObjectName("horizontalLayout");
+        horizontalLayout->setContentsMargins(0, 0, 0, 0);
+        Total_itens_label = new QLabel(widget);
+        Total_itens_label->setObjectName("Total_itens_label");
+        Total_itens_label->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        horizontalLayout->addWidget(Total_itens_label);
+
+        Total_tens_value = new QLabel(widget);
+        Total_tens_value->setObjectName("Total_tens_value");
+
+        horizontalLayout->addWidget(Total_tens_value);
+
         MainLoja->setCentralWidget(widget_central);
         menubar = new QMenuBar(MainLoja);
         menubar->setObjectName("menubar");
@@ -219,12 +253,16 @@ public:
         menuItem = new QMenu(menubar);
         menuItem->setObjectName("menuItem");
         MainLoja->setMenuBar(menubar);
-        statusbar = new QStatusBar(MainLoja);
-        statusbar->setObjectName("statusbar");
-        MainLoja->setStatusBar(statusbar);
 
         menubar->addAction(menuArquivo->menuAction());
         menubar->addAction(menuItem->menuAction());
+        menuArquivo->addAction(actionLer);
+        menuArquivo->addAction(actionSalvar);
+        menuArquivo->addSeparator();
+        menuArquivo->addAction(actionSair);
+        menuItem->addAction(actionIncluir_livro);
+        menuItem->addAction(actionIncluir_CD);
+        menuItem->addAction(actionIncluir_DVD);
 
         retranslateUi(MainLoja);
 
@@ -234,8 +272,12 @@ public:
     void retranslateUi(QMainWindow *MainLoja)
     {
         MainLoja->setWindowTitle(QCoreApplication::translate("MainLoja", "Estoque em loja", nullptr));
-        Total_itens_label->setText(QCoreApplication::translate("MainLoja", "Total de itens: ", nullptr));
-        Total_tens_value->setText(QCoreApplication::translate("MainLoja", "aaaaa", nullptr));
+        actionLer->setText(QCoreApplication::translate("MainLoja", "Ler...", nullptr));
+        actionSalvar->setText(QCoreApplication::translate("MainLoja", "Salvar...", nullptr));
+        actionSair->setText(QCoreApplication::translate("MainLoja", "Sair", nullptr));
+        actionIncluir_livro->setText(QCoreApplication::translate("MainLoja", "Incluir Livro...", nullptr));
+        actionIncluir_CD->setText(QCoreApplication::translate("MainLoja", "Incluir CD...", nullptr));
+        actionIncluir_DVD->setText(QCoreApplication::translate("MainLoja", "Incluir DVD...", nullptr));
         Label_Livros->setText(QCoreApplication::translate("MainLoja", "LIVROS", nullptr));
         Label_CDs->setText(QCoreApplication::translate("MainLoja", "CDs", nullptr));
         Label_DVD->setText(QCoreApplication::translate("MainLoja", "DVDs", nullptr));
@@ -257,6 +299,8 @@ public:
         ___qtablewidgetitem7->setText(QCoreApplication::translate("MainLoja", "Pre\303\247o", nullptr));
         QTableWidgetItem *___qtablewidgetitem8 = tableWidget_DVD->horizontalHeaderItem(2);
         ___qtablewidgetitem8->setText(QCoreApplication::translate("MainLoja", "Dura\303\247\303\243o", nullptr));
+        Total_itens_label->setText(QCoreApplication::translate("MainLoja", "Total de itens: ", nullptr));
+        Total_tens_value->setText(QCoreApplication::translate("MainLoja", "sddasdasdasdas", nullptr));
         menuArquivo->setTitle(QCoreApplication::translate("MainLoja", "Arquivo", nullptr));
         menuItem->setTitle(QCoreApplication::translate("MainLoja", "Item", nullptr));
     } // retranslateUi
