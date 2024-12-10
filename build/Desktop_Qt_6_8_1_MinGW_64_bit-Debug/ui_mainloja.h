@@ -19,6 +19,7 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTableWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -45,13 +46,10 @@ public:
     QTableWidget *tableWidget_Livros;
     QTableWidget *tableWidget_CD;
     QTableWidget *tableWidget_DVD;
-    QWidget *widget;
-    QHBoxLayout *horizontalLayout;
-    QLabel *Total_itens_label;
-    QLabel *Total_tens_value;
     QMenuBar *menubar;
     QMenu *menuArquivo;
     QMenu *menuItem;
+    QStatusBar *statusBar;
 
     void setupUi(QMainWindow *MainLoja)
     {
@@ -227,23 +225,6 @@ public:
 
         Layout_total->addLayout(Layout_tables);
 
-        widget = new QWidget(widget_central);
-        widget->setObjectName("widget");
-        widget->setGeometry(QRect(10, 540, 167, 18));
-        horizontalLayout = new QHBoxLayout(widget);
-        horizontalLayout->setObjectName("horizontalLayout");
-        horizontalLayout->setContentsMargins(0, 0, 0, 0);
-        Total_itens_label = new QLabel(widget);
-        Total_itens_label->setObjectName("Total_itens_label");
-        Total_itens_label->setAlignment(Qt::AlignmentFlag::AlignCenter);
-
-        horizontalLayout->addWidget(Total_itens_label);
-
-        Total_tens_value = new QLabel(widget);
-        Total_tens_value->setObjectName("Total_tens_value");
-
-        horizontalLayout->addWidget(Total_tens_value);
-
         MainLoja->setCentralWidget(widget_central);
         menubar = new QMenuBar(MainLoja);
         menubar->setObjectName("menubar");
@@ -253,6 +234,10 @@ public:
         menuItem = new QMenu(menubar);
         menuItem->setObjectName("menuItem");
         MainLoja->setMenuBar(menubar);
+        statusBar = new QStatusBar(MainLoja);
+        statusBar->setObjectName("statusBar");
+        statusBar->setSizeGripEnabled(false);
+        MainLoja->setStatusBar(statusBar);
 
         menubar->addAction(menuArquivo->menuAction());
         menubar->addAction(menuItem->menuAction());
@@ -299,8 +284,6 @@ public:
         ___qtablewidgetitem7->setText(QCoreApplication::translate("MainLoja", "Pre\303\247o", nullptr));
         QTableWidgetItem *___qtablewidgetitem8 = tableWidget_DVD->horizontalHeaderItem(2);
         ___qtablewidgetitem8->setText(QCoreApplication::translate("MainLoja", "Dura\303\247\303\243o", nullptr));
-        Total_itens_label->setText(QCoreApplication::translate("MainLoja", "Total de itens: ", nullptr));
-        Total_tens_value->setText(QCoreApplication::translate("MainLoja", "sddasdasdasdas", nullptr));
         menuArquivo->setTitle(QCoreApplication::translate("MainLoja", "Arquivo", nullptr));
         menuItem->setTitle(QCoreApplication::translate("MainLoja", "Item", nullptr));
     } // retranslateUi
