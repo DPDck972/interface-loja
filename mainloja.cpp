@@ -151,19 +151,31 @@ void MainLoja::refresh(void){
 
 void MainLoja::on_tableWidget_Livros_cellDoubleClicked(int row, int column)
 {
-
+    if(row <= X.getNumLivro()){
+        X.excluirLivro(row);
+        QMessageBox::information(this, "Exito", "O item foi excluido com sucesso");
+        this->refresh_livros(ui->tableWidget_Livros);
+    }
 }
 
 
 void MainLoja::on_tableWidget_CD_cellDoubleClicked(int row, int column)
 {
-
+    if(row <= X.getNumCD()){
+        X.excluirCD(row);
+        QMessageBox::information(this, "Exito", "O item foi excluido com sucesso");
+        this->refresh_CD(ui->tableWidget_CD);
+    }
 }
 
 
 void MainLoja::on_tableWidget_DVD_cellDoubleClicked(int row, int column)
 {
-
+    if(row <= X.getNumDVD()){
+        X.excluirDVD(row);
+        QMessageBox::information(this, "Exito", "O item foi excluido com sucesso");
+        this->refresh_DVD(ui->tableWidget_DVD);
+    }
 }
 
 void MainLoja::on_actionLer_triggered()
