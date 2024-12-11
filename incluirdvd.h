@@ -2,7 +2,6 @@
 #define INCLUIRDVD_H
 
 #include <QDialog>
-#include "loja.h"
 
 namespace Ui {
 class IncluirDVD;
@@ -25,7 +24,6 @@ public slots:
 
 private:
     Ui::IncluirDVD *ui;
-    DVD incluso;
 };
 
 #endif // INCLUIRDVD_H

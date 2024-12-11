@@ -18,8 +18,8 @@ MainLoja::MainLoja(QWidget *parent)
     ui->setupUi(this);
 
     //Status Bar
-    QLabel* label = new QLabel("Total de itens: ");
-    ui->statusBar->insertWidget(0,label);
+    //QLabel* label = new QLabel("Total de itens: ");
+    ui->statusBar->insertWidget(0,new QLabel("Total de itens: "));
     ui->statusBar->insertWidget(1,total_itens);
     ui->statusBar->setStyleSheet("QStatusBar::item { border: none; }");
 
